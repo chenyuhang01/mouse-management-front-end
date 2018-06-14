@@ -1,0 +1,72 @@
+table{
+    width: 100%;
+}
+
+th.mat-sort-header-sorted {
+    color: black;
+}
+
+.csvbutton{
+    margin: .5rem;
+}
+
+.search{
+    width: 100%;
+}
+
+.checkbox{
+    margin: .5rem;
+}
+
+.checkbox_row{
+    margin-top: 1rem;
+    padding: 1rem;
+}
+
+.row_style:hover{
+    background-color: aliceblue;
+    cursor: pointer;
+}
+
+.row_container{
+    overflow-x: scroll;
+    width: 95%;
+    margin: .5rem;
+}
+
+.table-responsive {
+    display: block;
+   
+    overflow-x: auto;
+}
+.mat-table {
+    margin-bottom: 1rem;
+    display: table;
+    border-collapse: collapse;
+    margin: 0px;
+}
+    
+.mat-row,
+.mat-header-row {
+    display: table-row;
+}
+    
+.mat-cell,
+.mat-header-cell {
+    word-wrap: initial;
+    display: table-cell;
+    padding: 0px 5px;
+    line-break: unset;
+    white-space: nowrap;
+    overflow: hidden;
+    vertical-align: middle;
+}
+    
+.expanarea{
+    width: 100%;
+}
+
+::ng-deep .my-tooltip {
+    background-color: #3F51B5;
+    white-space: pre-line;
+}

@@ -1,0 +1,44 @@
+<!--The content below is only a placeholder and can be replaced.-->
+<div class="container tableviewclass">
+    <div class="row">
+        <div class="col-12">
+            <tableview 
+                #tableview 
+                (insertmouseviewevent)="insertmouseview()" 
+                (confirmButtonviewevent)="confirmButtonEvent($event)"
+                (importtableImageevent)="importtableImageeventHandler($event)"
+                (importcsvevent)="startUploading()"></tableview>
+        </div>
+    </div>
+</div>
+<div class="container">
+    <div class="row">
+        <div class="col-12">
+            <editmouseview 
+                #editmouseview
+                [mouselist]="mouselist"
+                (cancelButtonEvent)="cancelButtonEventHandler($event)"
+                (updatefinishedEvent)="updatefinishedEventHandler()"
+                (importImageevent)="importImageeventHandler($event)"
+            ></editmouseview>
+        </div>
+    </div>
+    <div class="row">
+        <div class="col-6">
+            <insertmouseview 
+                #insertmouseviewref
+                [hidden]="!insertmousechecked_flag" 
+                (closepanel)="closepanel()"
+                (insertSuccessEvent)="insertSuccessEventHandler()"></insertmouseview>
+        </div>
+        <div class="col-6">
+            <uploadfileview 
+            #uploadfileview
+            [hidden]="!uploadfileviewchecked_flag"
+            (uploadFinishedEvent)="uploadFinishedEventHandler()"
+            (uploadImageFinishedEvent)="uploadImageFinishedEventHandler()"
+            (notasksevent)="notaskseventHandler()"
+            ></uploadfileview>
+        </div>
+    </div>
+</div>

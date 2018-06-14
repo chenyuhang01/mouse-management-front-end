@@ -1,0 +1,13 @@
+{
+	"folders": [
+		{
+			"path": "."
+		},
+		{
+			"path": "backend/mousedb"
+		}
+	],
+	"settings": {
+		"git.ignoreLimitWarning": true
+	}
+}
