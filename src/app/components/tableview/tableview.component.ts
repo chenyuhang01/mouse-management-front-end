@@ -120,6 +120,11 @@ export class tableview implements OnInit {
 
     public getTableContent() {
        
+        this.notificationService.toast(
+            "Fetching table data now...",
+            false
+        )
+
         this.mouseDataservice.getData().subscribe((data) => {
             this.jsonToMouse(data);
 
