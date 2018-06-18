@@ -1,7 +1,20 @@
-import { Component, Output, EventEmitter } from '@angular/core';
+//Angular Core Modules
+import { 
+    Component, 
+    Output, 
+    EventEmitter 
+} from '@angular/core';
+
+import { HttpEventType } from '@angular/common/http';
+
+//Angular material modules
+import { MatTooltipModule } from '@angular/material/tooltip';
+
+//User-defined services
 import { FileUploader } from '../../services/dataservice/fileuploader.service';
 import { NotificationService } from '../../services/notificationservice/notification.service';
-import { HttpEventType } from '@angular/common/http';
+
+
 
 interface FileUploadInterface {
     file: any,
@@ -9,7 +22,8 @@ interface FileUploadInterface {
     file_time: string,
     value: number,
     complete: boolean,
-    error: number
+    error: number,
+    message: string
 }
 
 @Component({
@@ -57,7 +71,8 @@ export class Uploadfileview {
                     file_time: datetime,
                     value: 0,
                     complete: false,
-                    error: 0
+                    error: 0,
+                    message: 'There is no error'
                 }
             )
             this.counter = this.counter + 1;
@@ -94,6 +109,7 @@ export class Uploadfileview {
                                         file.value = 100;
                                         file.complete = true;
                                         file.error = 2;
+                                        file.message = errordata.error_message[0];
                                     }
                                 }
                             } else {
@@ -106,6 +122,7 @@ export class Uploadfileview {
                                         file.value = 100;
                                         file.complete = true;
                                         file.error = 0;
+                                        file.message = "There is no error";
                                     }
                                 }
                             }
@@ -141,7 +158,8 @@ export class Uploadfileview {
                     file_time: datetime,
                     value: 0,
                     complete: false,
-                    error: 0
+                    error: 0,
+                    message: 'There is not error'
                 }
             )
             this.counter = this.counter + 1;
@@ -178,6 +196,7 @@ export class Uploadfileview {
                                         file.value = 100;
                                         file.complete = true;
                                         file.error = 2;
+                                        file.message = errordata.error_message[0];
                                     }
                                 }
                             } else {
@@ -190,6 +209,7 @@ export class Uploadfileview {
                                         file.value = 100;
                                         file.complete = true;
                                         file.error = 0;
+                                        file.message = 'There is no error';
                                     }
                                 }
                             }
@@ -203,6 +223,7 @@ export class Uploadfileview {
                                 file.value = 0;
                                 file.complete = true;
                                 file.error = 1;
+                                file.message = 'The format cannot be processed';
                             }
                         }
                     }

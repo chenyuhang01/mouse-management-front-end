@@ -1,7 +1,12 @@
 <div class="mat-elevation-z15 round-corner">
     <mat-list>
         <div *ngFor="let file of fileLists">
-            <mat-list-item id="{{file.fileid}}" class="loading-bar">
+            <mat-list-item 
+                    id="{{file.fileid}}" 
+                    class="loading-bar" 
+                    matTooltip="{{file.message}}"
+                    [formControl]="after"
+                    >
                 <div class="row" style="width: 100%;">
                     <div class="col-5" style="width: 100%;">
                         <h4 mat-line>{{file.file.name}}</h4>
