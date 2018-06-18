@@ -1,8 +1,12 @@
 //Angular core modules
 import { Component, ViewChild } from '@angular/core';
 
+//Http connectiontesting
+import { HttpClient, HttpHeaders } from '@angular/common/http';
+
 //Model Class
 import { Mouse } from '../app/components/model/mouse.component';
+import { BASEURL, GETCAT } from '../app/constants/constants';
 @Component({
   selector: 'app-root',
   templateUrl: './app.component.html',
@@ -20,18 +24,53 @@ export class AppComponent {
   //Toggling editmouse, if true, the view showup, if false, the view closeed
   editmousechecked_flag = true;
 
-  
+  //Used to set the setIntervel
+  public timer_local;
 
+  //Flags if connection is up
+  public ifConnection = false;
   //References to each of the child view
   @ViewChild('tableview') tableview;
   @ViewChild('uploadfileview') uploadfileview;
   @ViewChild('insertmouseviewref') insertmouseviewref;
 
+  public httpOptions = {
+    headers: new HttpHeaders({
+        'Access-Control-Allow-Headers': BASEURL,
+        'Content-Type': 'application/json;charset=utf-8'
+    })
+};
   
   //Reference to the seleted mouse
   mouselist: Mouse[];
 
-  constructor() { }
+
+  
+  constructor(private httpclient: HttpClient) { 
+    
+    let requesturl: string = BASEURL + GETCAT;
+
+    //Change the status with online event triggered
+    window.ononline = ()=>{
+      this.ifConnection = true;
+    }
+    //Change the status with offline event triggered
+    window.onoffline = () => {
+      this.ifConnection = false;
+    }
+
+
+    //Check if it is online for the first time
+    this.httpclient.get(requesturl).subscribe(
+      success => {
+        this.ifConnection = true;
+      }, 
+      error => {
+        this.ifConnection = false;
+      }
+    )
+
+  }
 
 
   //tableview related

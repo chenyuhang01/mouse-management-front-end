@@ -37,7 +37,7 @@ import { timer } from 'rxjs';
 })
 export class DialogView {
 
-  private imageLists: string[] = [];
+  public imageLists: string[] = [];
 
   @Output('importImageevent') importImageevent = new EventEmitter<any>();
 
@@ -45,9 +45,9 @@ export class DialogView {
 
   constructor(
     public dialogRef: MatDialogRef<DialogView>,
-    private mouseservicehandler: mouseservice,
-    private notificationService: NotificationService,
-    private fileuploader: FileUploader,
+    public mouseservicehandler: mouseservice,
+    public notificationService: NotificationService,
+    public fileuploader: FileUploader,
     @Inject(MAT_DIALOG_DATA) public data: any) {
     this.getImage();
   }

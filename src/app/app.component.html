@@ -1,44 +1,45 @@
-<!--The content below is only a placeholder and can be replaced.-->
-<div class="container tableviewclass">
-    <div class="row">
-        <div class="col-12">
-            <tableview 
-                #tableview 
-                (insertmouseviewevent)="insertmouseview()" 
-                (confirmButtonviewevent)="confirmButtonEvent($event)"
-                (importtableImageevent)="importtableImageeventHandler($event)"
-                (importcsvevent)="startUploading()"></tableview>
+<!-- Toolbar of the page-->
+<mat-toolbar color="accent">
+    <img src="assets/logo.png" style="width: 300px;">
+    <span>Fu Nai Yang's Lab mouse management system</span>
+    <span class="spacer"></span>
+    <span *ngIf="ifConnection">
+        Connected
+        <i class="fa fa-check" aria-hidden="true" style="color:lightgreen"></i>
+    </span>
+    <span *ngIf="!ifConnection">
+        Disconnected
+        <i class="fa fa-times" aria-hidden="true" style="color:red"></i>
+    </span>
+</mat-toolbar>
+<!--Content of the page-->
+<div *ngIf="ifConnection" class="isconnected">
+    <div class="container tableviewclass">
+        <div class="row">
+            <div class="col-12">
+                <tableview #tableview (insertmouseviewevent)="insertmouseview()" (confirmButtonviewevent)="confirmButtonEvent($event)" (importtableImageevent)="importtableImageeventHandler($event)"
+                    (importcsvevent)="startUploading()"></tableview>
+            </div>
+        </div>
+    </div>
+    <div class="container">
+        <div class="row">
+            <div class="col-12">
+                <editmouseview #editmouseview [mouselist]="mouselist" (cancelButtonEvent)="cancelButtonEventHandler($event)" (updatefinishedEvent)="updatefinishedEventHandler()"
+                    (importImageevent)="importImageeventHandler($event)"></editmouseview>
+            </div>
+        </div>
+        <div class="row">
+            <div class="col-6">
+                <insertmouseview #insertmouseviewref [hidden]="!insertmousechecked_flag" (closepanel)="closepanel()" (insertSuccessEvent)="insertSuccessEventHandler()"></insertmouseview>
+            </div>
+            <div class="col-6">
+                <uploadfileview #uploadfileview [hidden]="!uploadfileviewchecked_flag" (uploadFinishedEvent)="uploadFinishedEventHandler()"
+                    (uploadImageFinishedEvent)="uploadImageFinishedEventHandler()" (notasksevent)="notaskseventHandler()"></uploadfileview>
+            </div>
         </div>
     </div>
 </div>
-<div class="container">
-    <div class="row">
-        <div class="col-12">
-            <editmouseview 
-                #editmouseview
-                [mouselist]="mouselist"
-                (cancelButtonEvent)="cancelButtonEventHandler($event)"
-                (updatefinishedEvent)="updatefinishedEventHandler()"
-                (importImageevent)="importImageeventHandler($event)"
-            ></editmouseview>
-        </div>
-    </div>
-    <div class="row">
-        <div class="col-6">
-            <insertmouseview 
-                #insertmouseviewref
-                [hidden]="!insertmousechecked_flag" 
-                (closepanel)="closepanel()"
-                (insertSuccessEvent)="insertSuccessEventHandler()"></insertmouseview>
-        </div>
-        <div class="col-6">
-            <uploadfileview 
-            #uploadfileview
-            [hidden]="!uploadfileviewchecked_flag"
-            (uploadFinishedEvent)="uploadFinishedEventHandler()"
-            (uploadImageFinishedEvent)="uploadImageFinishedEventHandler()"
-            (notasksevent)="notaskseventHandler()"
-            ></uploadfileview>
-        </div>
-    </div>
+<div *ngIf="!ifConnection">
+
 </div>

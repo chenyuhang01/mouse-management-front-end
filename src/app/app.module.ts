@@ -25,6 +25,7 @@ import {
   MatDatepickerModule,
   MatNativeDateModule,
   MatProgressBarModule,
+  MatToolbarModule,
   MAT_DATE_LOCALE
 } 
 from '@angular/material';
@@ -105,7 +106,8 @@ import { PopoverModule } from '../../node_modules/ngx-popover';
     MatNativeDateModule,
     HttpClientModule,
     MatProgressBarModule,
-    PopoverModule
+    PopoverModule,
+    MatToolbarModule
   ],
   providers: [
     mouseservice,
