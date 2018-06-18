@@ -1,11 +1,23 @@
-import { Component, OnInit, Output, EventEmitter, Input, ElementRef, ViewChild } from '@angular/core';
+//Angular core modules
+import { 
+    Component, 
+    OnInit, 
+    Output, 
+    EventEmitter, 
+    Input, 
+    ElementRef, 
+    ViewChild 
+} from '@angular/core';
+import { FormControl } from '@angular/forms';
+//User-Definede Services
 import { categoryservice } from '../../../services/dataservice/categoryservice.service';
 import { NotificationService } from '../../../services/notificationservice/notification.service';
 import { mouseservice } from '../../../services/dataservice/mouseservice.service';
-import { FormControl } from '@angular/forms';
+import { FileUploader } from '../../../services/dataservice/fileuploader.service';
+
+//User defined model
 import { Mouse } from '../../model/mouse.component';
 
-import { FileUploader } from '../../../services/dataservice/fileuploader.service';
 
 @Component({
     selector: 'editmousesmallview',
@@ -107,7 +119,7 @@ export class EditMouseViewSmall implements OnInit {
         }
     }
 
-    getJsonObject() {
+    getJsonObjectFromFormInputs() {
         let jsonObject = {
             physical_id: this.physical_id_inputs,
             mouseline: this.mouseline_select,
@@ -287,7 +299,7 @@ export class EditMouseViewSmall implements OnInit {
             return;
         }
 
-        let jsonObject = this.getJsonObject();
+        let jsonObject = this.getJsonObjectFromFormInputs();
 
         this.mouseservicehandler.updateData(jsonObject).subscribe(
             event => {

@@ -1,33 +1,36 @@
+//Angular core module
 import { Component, OnInit, ViewChild, Output, EventEmitter, ElementRef, Inject } from '@angular/core';
+import { FormControl } from '@angular/forms';
+import { SelectionModel } from '@angular/cdk/collections';
+//Angular material module
 import { Mouse, PFA, FreezeDown } from '../model/mouse.component';
 import {
     MatTableDataSource,
     MatSort,
     MatPaginator,
-    MatSnackBar
+    MatSnackBar, 
+    MatDialog, 
+    MAT_DIALOG_DATA
 } from '@angular/material';
 
 
+//User custom services
 //Using service getting mouse data from server
 import { mouseservice } from '../../services/dataservice/mouseservice.service';
-
-//Json object to csv
-import { Angular2Csv } from 'angular2-csv/Angular2-csv';
-
-import { FormControl } from '@angular/forms';
-
-//Dialog Related module
-import { MatDialog, MatDialogRef, MAT_DIALOG_DATA } from '@angular/material';
-import { DialogView } from './dialogview/dialogview.component';
-
-import { SelectionModel } from '@angular/cdk/collections';
-
-import { MONTH, ONEDAY } from '../../constants/constants';
-
 import { NotificationService } from '../../services/notificationservice/notification.service';
 import { FileUploader } from '../../services/dataservice/fileuploader.service';
 
-import { FileInterface } from '../model/file';
+//User custom components
+import { DialogView } from './dialogview/dialogview.component';
+
+//3rd Party services
+//Json object to csv
+import { Angular2Csv } from 'angular2-csv/Angular2-csv';
+
+
+//Importing constants variable
+import { ONEDAY } from '../../constants/constants';
+
 
 @Component({
     selector: 'tableview',
@@ -92,10 +95,10 @@ export class tableview implements OnInit {
     ];
 
     //Create datasoucre for mat table
-    private dataSource: MatTableDataSource<Mouse>;
-    private selection = new SelectionModel<Mouse>(true, []);
+    public dataSource: MatTableDataSource<Mouse>;
+    public selection = new SelectionModel<Mouse>(true, []);
     //data getting from service
-    private datalist: any;
+    public datalist: any;
 
     @ViewChild(MatPaginator) paginator: MatPaginator;
     @ViewChild(MatSort) sort: MatSort;
@@ -171,10 +174,10 @@ export class tableview implements OnInit {
     }
 
     constructor(
-        private mouseDataservice: mouseservice,
-        private snackBar: MatSnackBar,
-        private notificationService:NotificationService,
-        private fileuploader: FileUploader,
+        public mouseDataservice: mouseservice,
+        public snackBar: MatSnackBar,
+        public notificationService:NotificationService,
+        public fileuploader: FileUploader,
         public dialog: MatDialog) {
         this.Math = Math;
         this.ONEDAY = ONEDAY;
@@ -238,9 +241,9 @@ export class tableview implements OnInit {
 
     //Buttons Related Method
 
-    private insertmousechecked: boolean = false;
-    private insertmousebuttondisplay_opened: string = "Open Insert Mouse panel";
-    private insertmousebuttondisplay_closed: string = "Close Insert Mouse panel";
+    public insertmousechecked: boolean = false;
+    public insertmousebuttondisplay_opened: string = "Open Insert Mouse panel";
+    public insertmousebuttondisplay_closed: string = "Close Insert Mouse panel";
 
     public closepanel() {
         this.insertmousechecked = !this.insertmousechecked;
@@ -441,8 +444,8 @@ export class tableview implements OnInit {
         }).filter(data => data != '');
     }
 
-    private editButtonenabled: boolean = false;
-    private editConfirmbuttonEnabled: boolean = false;
+    public editButtonenabled: boolean = false;
+    public editConfirmbuttonEnabled: boolean = false;
     //Trigger when edit button is pressed
     editbuttonpressed(): void {
 
@@ -506,10 +509,9 @@ export class tableview implements OnInit {
         this.openDialog(row);
     }
 
+    //dialog view related
     @Output('importtableImageevent') importtableImageevent = new EventEmitter<any>();
-
-    private dialogRef = null;
-
+    public dialogRef = null;
     openDialog(row): void {
         this.dialogRef = this.dialog.open(DialogView, {
             width: '1200px',

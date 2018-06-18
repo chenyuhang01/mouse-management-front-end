@@ -1,20 +1,41 @@
-import { Component, Inject, OnInit,Output,ViewChild,EventEmitter,ElementRef  } from '@angular/core';
-import { MatDialogRef, MAT_DIALOG_DATA } from '@angular/material';
+//Angular core modules
+import {
+  Component,
+  Inject,
+  Output,
+  ViewChild,
+  EventEmitter,
+  ElementRef
+} from '@angular/core';
+
+//Angular material modules
+import {
+  MatDialogRef,
+  MAT_DIALOG_DATA
+} from '@angular/material';
+
+//User-defined services modules
 import { mouseservice } from '../../../services/dataservice/mouseservice.service';
 import { NotificationService } from '../../../services/notificationservice/notification.service';
-import baguetteBox from 'baguettebox.js';
+import { FileUploader } from '../../../services/dataservice/fileuploader.service';
 
+//User-defined constants
 import { SERVER, IMAGEURL } from '../../../constants/constants';
 
+//3rd Party module
+
+//Used for enlarge images
+import baguetteBox from 'baguettebox.js';
+
+//Reactive modules
 import { timer } from 'rxjs';
-import { FileUploader } from '../../../services/dataservice/fileuploader.service';
 
 @Component({
   selector: 'dialogview',
   templateUrl: './dialogview.component.html',
   styleUrls: ['./dialogview.component.css']
 })
-export class DialogView implements OnInit {
+export class DialogView {
 
   private imageLists: string[] = [];
 
@@ -28,10 +49,10 @@ export class DialogView implements OnInit {
     private notificationService: NotificationService,
     private fileuploader: FileUploader,
     @Inject(MAT_DIALOG_DATA) public data: any) {
-      this.getImage();
+    this.getImage();
   }
 
-  getImage(){
+  getImage() {
     console.log(this.data.row.physical_id);
     this.mouseservicehandler.getMouseImage(this.data.row.physical_id).subscribe(
       event => {
@@ -60,21 +81,24 @@ export class DialogView implements OnInit {
             let imageurl = SERVER + IMAGEURL + this.data.row.physical_id + '/' + image;
             this.imageLists.push(imageurl);
           }
+
+          //Must be delayed by one second before running initialization
+          //of the baguttebox after image is downloaded
           let timer_local = timer(1000);
           let suscription = timer_local.subscribe(
             (tick) => {
               baguetteBox.run('.grid-gallery');
             });
-
+          //Run second times to make sure it runs
+          let timer_local_second = timer(2000);
+          let suscription_second = timer_local_second.subscribe(
+            (tick) => {
+              baguetteBox.run('.grid-gallery');
+            });
         }
       }
     )
   }
-
-  ngOnInit() {
-
-  }
-
   onExitClick(): void {
     this.dialogRef.close();
   }

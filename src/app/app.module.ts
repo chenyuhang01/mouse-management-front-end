@@ -25,7 +25,7 @@ import {
   MatDatepickerModule,
   MatNativeDateModule,
   MatProgressBarModule,
-  MAT_DATE_LOCALE,MAT_SNACK_BAR_DATA
+  MAT_DATE_LOCALE
 } 
 from '@angular/material';
 import { HttpModule } from '@angular/http';
@@ -50,7 +50,6 @@ import { FileUploader } from '../app/services/dataservice/fileuploader.service';
 
 //3rd Party image uploader module
 import { ImageUploadModule } from "angular2-image-upload";
-import { Angular2Csv } from 'angular2-csv/Angular2-csv';
 
 import { LazyLoadImageModule } from 'ng-lazyload-image';
 
