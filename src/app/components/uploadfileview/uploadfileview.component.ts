@@ -1,7 +1,7 @@
 import { Component, Output, EventEmitter } from '@angular/core';
 import { FileUploader } from '../../services/dataservice/fileuploader.service';
 import { NotificationService } from '../../services/notificationservice/notification.service';
-import { HttpEventType, HttpResponse } from '@angular/common/http';
+import { HttpEventType } from '@angular/common/http';
 
 interface FileUploadInterface {
     file: any,
