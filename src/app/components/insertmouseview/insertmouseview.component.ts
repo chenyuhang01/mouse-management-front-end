@@ -5,7 +5,7 @@ import {
     Output, 
     EventEmitter
 } from '@angular/core';
-
+import { FormControl } from '@angular/forms';
 //Angular material Modules
 import {  
     MatSnackBar,
@@ -41,8 +41,12 @@ export class InsertMouseView implements OnInit {
     public comment_textarea: string = '';
 
     /* Retrieved Date Data */
-    public birthDate: Date;
-    public deathDate: Date;
+    // public birthDate: Date;
+    // public deathDate: Date;
+
+    /* Retrieved Date Data */
+    public birthDate: FormControl;
+    public deathDate: FormControl;
 
     /* Retrieved PFA Data */
     public pfa_liver_checkbox: boolean = false;
@@ -79,6 +83,9 @@ export class InsertMouseView implements OnInit {
         //Get Category data
         this.getCategoryData(true);
 
+        //Initialize the date pickers
+        this.birthDate = new FormControl("");
+        this.deathDate = new FormControl("");
     }
 
     public getCategoryData(beforeCreated: boolean) {
@@ -124,9 +131,9 @@ export class InsertMouseView implements OnInit {
     /* Date related callbacks */
     dateTrigger(event, result) {
         if (result.targetElement.id == "birthdatepicker") {
-            this.birthDate.setDate(result.value);
+            this.birthDate.setValue(result.value);
         } else {
-            this.deathDate.setDate(result.value);
+            this.deathDate.setValue(result.value);
         }
     }
 
@@ -143,8 +150,8 @@ export class InsertMouseView implements OnInit {
             sacrificer: this.sacrificer_select,
             purpose: this.purpose_textarea,
             comment: this.comment_textarea,
-            birthdate: this.birthDate ? this.birthDate.toLocaleDateString("en-sg") : '',
-            deathdate: this.deathDate ? this.deathDate.toLocaleDateString("en-sg") : '',
+            birthdate: this.birthDate ? this.birthDate.value.toLocaleDateString("en-sg") : '',
+            deathdate: this.deathDate ? this.deathDate.value.toLocaleDateString("en-sg") : '',
             pfa: {
                 liver: this.pfa_liver_checkbox,
                 liver_tumor: this.pfa_liver_tumor_checkbox,

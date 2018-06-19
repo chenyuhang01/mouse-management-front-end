@@ -60,7 +60,14 @@
                     <div class="col-6">
                         <!-- Birth Date -->
                         <mat-form-field style="width: 100%;">
-                            <input id="birthdatepicker" matInput [matDatepicker]="birthDatepicker" placeholder="Birth Date" (dateChange)="dateTrigger('change', $event)">
+                            <input 
+                            id="birthdatepicker" 
+                            matInput 
+                            [matDatepicker]="birthDatepicker" 
+                            placeholder="Birth Date" 
+                            (dateChange)="dateTrigger('change', $event)"
+                            [formControl]="birthDate"
+                            >
                             <mat-datepicker-toggle matSuffix [for]="birthDatepicker"></mat-datepicker-toggle>
                             <mat-datepicker #birthDatepicker></mat-datepicker>
                         </mat-form-field>
@@ -69,7 +76,15 @@
                         <!-- Death Date -->
                         <!-- Disabled previous date if birthDate is set-->
                         <mat-form-field style="width: 100%;">
-                            <input id="deathdatepicker" matInput [min]="birthDate" [matDatepicker]="deathDatepicker" placeholder="Death Date" (dateChange)="dateTrigger('change', $event)">
+                            <input 
+                            id="deathdatepicker" 
+                            matInput 
+                            [min]="birthDate.value" 
+                            [matDatepicker]="deathDatepicker" 
+                            placeholder="Death Date" 
+                            (dateChange)="dateTrigger('change', $event)"
+                            [formControl]="deathDate"
+                            >
                             <mat-datepicker-toggle matSuffix [for]="deathDatepicker"></mat-datepicker-toggle>
                             <mat-datepicker #deathDatepicker></mat-datepicker>
                         </mat-form-field>
