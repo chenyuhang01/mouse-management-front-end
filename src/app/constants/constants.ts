@@ -1,4 +1,6 @@
-export const SERVER:string = 'http://127.0.0.1:8000/';
+import { environment } from '../../environments/environment';
+
+export const SERVER:string = environment.serverUrl;
 export const BASEURL: string = SERVER + 'mousemanagement/';
 export const GETCAT: string = 'getcategory';
 export const INSERTCAT: string = 'category_insert';
