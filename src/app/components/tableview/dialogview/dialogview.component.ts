@@ -39,6 +39,9 @@ export class DialogView {
 
   public imageLists: string[] = [];
 
+  public showimageFlag: boolean = false; 
+  public noimageIndicator: boolean = false;
+
   @Output('importImageevent') importImageevent = new EventEmitter<any>();
 
   @ViewChild('imagefileInput') imagefileInput: ElementRef;
@@ -72,6 +75,8 @@ export class DialogView {
             errordata,
             true
           )
+          this.noimageIndicator = true;
+          
         } else {
 
           let images: string[] = result.split(",");
@@ -82,18 +87,27 @@ export class DialogView {
             this.imageLists.push(imageurl);
           }
 
+          this.notificationService.toast(
+            "Processing images now..",
+            false
+          )
+
           //Must be delayed by one second before running initialization
           //of the baguttebox after image is downloaded
           let timer_local = timer(1000);
           let suscription = timer_local.subscribe(
             (tick) => {
               baguetteBox.run('.grid-gallery');
+              this.showimageFlag = true;
+              this.noimageIndicator = false;
             });
           //Run second times to make sure it runs
           let timer_local_second = timer(2000);
           let suscription_second = timer_local_second.subscribe(
             (tick) => {
               baguetteBox.run('.grid-gallery');
+              this.showimageFlag = true;
+              this.noimageIndicator = false;
             });
         }
       }

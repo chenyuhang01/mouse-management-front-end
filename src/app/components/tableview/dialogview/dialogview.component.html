@@ -8,7 +8,7 @@
             <h4>Physical ID: {{data.row.physical_id}}</h4>
         </div>
     </div>
-    <div class="gallery-block grid-gallery lazy-load-images">
+    <div class="gallery-block grid-gallery lazy-load-images" *ngIf="showimageFlag">
         <div class="row" style="width:100%;">
             <div *ngFor="let image of imageLists" class="col-3 item">
                 <a class="lightbox" href="{{image}}">
@@ -16,6 +16,9 @@
                 </a>
             </div>
         </div>
+    </div>
+    <div *ngIf="noimageIndicator" class="noimageindicator">
+        There are no images for this mouse yet. Please import the images using upload image buttons.
     </div>
     <div class="row">
         <div class="col-6 text-left">

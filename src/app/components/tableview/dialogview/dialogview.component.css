@@ -11,6 +11,10 @@
   width: 100%;
 }
 
+.noimageindicator{
+  margin: .5 rem;
+}
+
 @media (min-width: 991px) {
   /* CSS that should be displayed if width is equal to or less than 800px goes here */
       .adjust-right{
