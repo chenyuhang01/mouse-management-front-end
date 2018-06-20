@@ -30,6 +30,8 @@ import baguetteBox from 'baguettebox.js';
 //Reactive modules
 import { timer } from 'rxjs';
 
+import { environment } from '../../../../environments/environment.prod';
+
 @Component({
   selector: 'dialogview',
   templateUrl: './dialogview.component.html',
@@ -83,7 +85,7 @@ export class DialogView {
           images.splice(-1, 1);
           this.imageLists = [];
           for (let image of images) {
-            let imageurl = SERVER + IMAGEURL + this.data.row.physical_id + '/' + image;
+            let imageurl = environment.baseurl + '/static/photos/' + this.data.row.physical_id + '/' + image;
             this.imageLists.push(imageurl);
           }
 

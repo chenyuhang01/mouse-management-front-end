@@ -1,6 +1,6 @@
-import { environment } from '../../environments/environment';
+import { environment } from '../../environments/environment.prod';
 
-export const SERVER:string = environment.serverUrl;
+export const SERVER:string = environment.baseurl + '/mousekernel/';
 export const BASEURL: string = SERVER + 'mousemanagement/';
 export const GETCAT: string = 'getcategory';
 export const INSERTCAT: string = 'category_insert';
